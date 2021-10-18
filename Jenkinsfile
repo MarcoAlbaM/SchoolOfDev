@@ -11,8 +11,7 @@ pipeline {
             steps {
                 echo "${WORKSPACE}"
                 echo "${JENKINS_HOME}"
-                sh 'ls'
-                
+                sh 'ls'             
             }
         }
         stage('Analisis') {
