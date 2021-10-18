@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                ECHO 'Push...'
+                echo 'Push...'
             }
         }
     }
