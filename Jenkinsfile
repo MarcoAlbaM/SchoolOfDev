@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('building') {
             steps {
-                sh 'sudo docker build . -t minecraftserver'
-                sh 'sudo docker image ls'
+                sh 'docker build . -t minecraftserver'
+                sh 'docker image ls'
             }
         }
         stage('Anal') {
