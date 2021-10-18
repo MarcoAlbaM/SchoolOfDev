@@ -3,13 +3,14 @@ pipeline {
 
     stages {
         stage('Preparacion') {
-            steps {
-                sh 'git clone https://github.com/MarcoAlbaM/SchoolOfDev.git'
-            }
+            checkout scm
         }
         stage('Contruccion') {
             steps {
-                sh 'sudo docker build 
+                sh 'cd SchoolOfDev'
+            }
+            steps {
+                sh 'sudo docker build . -t minecraftserver:1'
             }
         }
         stage('Analisis') {
@@ -19,7 +20,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                echo 'Deploying....'
+                sh 'sudo docker push maamadmin/cicdassigment:1'
             }
         }
     }
