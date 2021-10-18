@@ -2,14 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Contruccion') {
+        stage('checking') {
+            steps {
+                checkout scm           
+            }
+        stage('building') {
             steps {
                 echo "${WORKSPACE}"
                 echo "${JENKINS_HOME}"
                 sh 'ls'             
             }
         }
-        stage('Analisis') {
+        stage('Anal') {
             steps {
                 echo 'Deploying....'
             }
