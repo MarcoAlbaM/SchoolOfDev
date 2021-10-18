@@ -12,6 +12,7 @@ pipeline {
                 echo "${WORKSPACE}"
                 echo "${JENKINS_HOME}"
                 sh 'ls'
+                
             }
         }
         stage('Analisis') {
