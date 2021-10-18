@@ -2,15 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Preparacion1') {
-            checkout scm
+        stage('checkout') {
+            steps {
+                checkout scm
+            }  
         }
         stage('Contruccion') {
             steps {
-                sh 'cd SchoolOfDev'
-            }
-            steps {
-                sh 'sudo docker build . -t minecraftserver:1'
+                echo "${WORKSPACE}"
+                echo "${JENKINS_HOME}"
+                sh 'ls'
             }
         }
         stage('Analisis') {
@@ -20,7 +21,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                sh 'sudo docker push maamadmin/cicdassigment:1'
+                ECHO 'Push...'
             }
         }
     }
