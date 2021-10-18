@@ -2,15 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('checking') {
-            steps {
-                checkout scm           
-            }
         stage('building') {
             steps {
-                echo "${WORKSPACE}"
-                echo "${JENKINS_HOME}"
-                sh 'ls'             
+                sh 'sudo docker build . -t minecraftserver'
+                sh 'sudo docker image ls'
             }
         }
         stage('Anal') {
