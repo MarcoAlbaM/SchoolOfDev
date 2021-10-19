@@ -4,13 +4,17 @@ pipeline {
     stages {
         stage('building') {
             steps {
+                sh """
+                docker rm -f \$(docker ps -a -q)
+                docker rmi -f \$(docker images -a -q)
+                """
                 sh 'docker build . -t minecraftserver:$BUILD_NUMBER'
                 sh 'docker image ls'
             }
         }
         stage('Analysis') {
             steps {
-                sh 'docker run -d --name minecraftserver -p 25565:25565 minecraftserver'
+                echo 'Analysis'
             }
         }
         stage('Push') {
