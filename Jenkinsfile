@@ -4,18 +4,21 @@ pipeline {
     stages {
         stage('building') {
             steps {
-                sh 'docker build . -t minecraftserver'
+                sh 'docker build . -t cicdassigment:latest'
                 sh 'docker image ls'
             }
         }
-        stage('Anal') {
+        stage('Analysis') {
             steps {
                 echo 'Deploying....'
             }
         }
         stage('Push') {
             steps {
-                echo 'Push...'
+                withCredentials([usernamePassword(credentialsId: 'DockerHubCredencial', passwordVariable: 'DockerHubPass', usernameVariable: 'DockerHubUser')]) {
+                    sh 'docker login -u ${DockerHubUser} -p ${DockerHubPass}'
+                    sh 'docker push maamadmin/cicdassigment:latest'
+                }
             }
         }
     }
