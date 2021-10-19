@@ -1,6 +1,19 @@
 pipeline {
     agent any
-
+       
+    stage('Checkout'){
+            steps {
+               checkout scm
+            }    
+    }
+    stage('CleanUp') {
+            steps {
+               sh """
+               docker kill \$(docker ps -q)
+               docker system prune -a -f
+               """
+            }
+        }
     stages {
         stage('building') {
             steps {
@@ -29,14 +42,6 @@ pipeline {
                     sh 'docker login -u ${DockerHubUser} -p ${DockerHubPass}'
                     sh 'docker run -d --name minecraftserverconta -p 25565:25565 maamadmin/cicdassigment:latest'
                 }
-            }
-        }
-         stage('CleanUp') {
-            steps {
-               sh """
-               docker kill \$(docker ps -q)
-               docker system prune -a -f
-               """
             }
         }
     }
