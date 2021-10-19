@@ -4,10 +4,6 @@ pipeline {
     stages {
         stage('building') {
             steps {
-                sh """
-                docker rm -f \$(docker ps -a -q)
-                docker rmi -f \$(docker images -a -q)
-                """
                 sh 'docker build . -t minecraftserver:$BUILD_NUMBER'
                 sh 'docker image ls'
             }
