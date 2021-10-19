@@ -5,7 +5,6 @@ pipeline {
         stage('building') {
             steps {
                 sh 'docker build . -t minecraftserver:$BUILD_NUMBER'
-                sh 'docker image ls'
             }
         }
         stage('Analysis') {
