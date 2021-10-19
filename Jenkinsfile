@@ -10,6 +10,7 @@ pipeline {
         stage('CleanUp') {
                 steps {
                    sh """
+                   docker kill \$(docker ps -q)
                    docker system prune -a -f
                    """
                 }
