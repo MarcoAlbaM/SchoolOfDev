@@ -20,8 +20,7 @@ pipeline {
                     docker login -u ${DockerHubUser} -p ${DockerHubPass}
                     docker image tag minecraftserver:$BUILD_NUMBER maamadmin/cicdassigment:$BUILD_NUMBER
                     docker image push maamadmin/cicdassigment:$BUILD_NUMBER
-                    docker rm -f \$(docker ps -a -q)
-                    docker rmi -f \$(docker images -a -q)
+                    docker system prune -a -f
                     """
                 }
             }
