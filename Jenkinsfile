@@ -29,7 +29,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DockerHubCredencial', passwordVariable: 'DockerHubPass', usernameVariable: 'DockerHubUser')]) {
                     sh 'docker login -u ${DockerHubUser} -p ${DockerHubPass}'
-                    sh 'docker run -d --name minecraftserverconta -p 25565:25565 cicdassigment:latest'
+                    sh 'docker run -d --name minecraftserverconta -p 25565:25565 maamadmin/cicdassigment:latest'
                 }
             }
         }
