@@ -1,20 +1,20 @@
 pipeline {
     agent any
        
-    stage('Checkout'){
-            steps {
-               checkout scm
-            }    
-    }
-    stage('CleanUp') {
-            steps {
-               sh """
-               docker kill \$(docker ps -q)
-               docker system prune -a -f
-               """
-            }
-        }
     stages {
+        stage('Checkout'){
+                steps {
+                   checkout scm
+                }    
+        }
+        stage('CleanUp') {
+                steps {
+                   sh """
+                   docker kill \$(docker ps -q)
+                   docker system prune -a -f
+                   """
+                }
+            }
         stage('building') {
             steps {
                 sh 'docker build . -t minecraftserver:$BUILD_NUMBER'
