@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('building') {
             steps {
-                sh 'docker build . -t cicdassigment:latest'
+                sh 'docker build . -t minecraftserver:latest'
                 sh 'docker image ls'
             }
         }
@@ -16,8 +16,11 @@ pipeline {
         stage('Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DockerHubCredencial', passwordVariable: 'DockerHubPass', usernameVariable: 'DockerHubUser')]) {
-                    sh 'docker login -u ${DockerHubUser} -p ${DockerHubPass}'
-                    sh 'docker push maamadmin/cicdassigment:latest'
+                    sh """ 
+                    docker login -u ${DockerHubUser} -p ${DockerHubPass}
+                    docker image tag minecraftserver:latest maamadmin/cicdassigment:latest
+                    docker image push maamadmin/cicdassigment:latest 
+                    """
                 }
             }
         }
