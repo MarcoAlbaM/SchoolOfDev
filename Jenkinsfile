@@ -19,7 +19,6 @@ pipeline {
                     docker login -u ${DockerHubUser} -p ${DockerHubPass}
                     docker image tag minecraftserver:$BUILD_NUMBER maamadmin/cicdassigment:$BUILD_NUMBER
                     docker image push maamadmin/cicdassigment:$BUILD_NUMBER
-                    docker system prune -a -f
                     """
                 }
             }
@@ -30,6 +29,14 @@ pipeline {
                     sh 'docker login -u ${DockerHubUser} -p ${DockerHubPass}'
                     sh 'docker run -d --name minecraftserverconta -p 25565:25565 maamadmin/cicdassigment:latest'
                 }
+            }
+        }
+         stage('CleanUp') {
+            steps {
+               sh """
+               docker kill $(docker ps -q)
+               docker system prune -a -f
+               """
             }
         }
     }
